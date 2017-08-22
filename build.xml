@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project SYSTEM 'ant_build.dtd'>
+<project name="Pasta2Sample" default="build_all">
+	<property name="src.pasta2" value="src/pasta2" />
+	<property name="src.common" value="src/common" />
+	<property name="src.main" value="src/main" />
+	<property name="src.actions" value="src/actions" />
+
+	<property name="src.buildlib" value="buildlib" />
+	<property name="src.webroot" value="WebContent" />
+	<property name="web.buildroot" value="ant_build" />
+	<property name="tmp.src.total" value="${web.buildroot}/srctmp" />
+	<property name="web.compile" value="${web.buildroot}/WEB-INF/classes" />
+	<property name="web.lib" value="${web.buildroot}/WEB-INF/lib" />
+
+	<target name="copy">
+		<delete dir="${web.buildroot}" />
+		<mkdir dir="${web.buildroot}" />
+		<mkdir dir="${web.compile}" />
+		<mkdir dir="${tmp.src.total}" />
+		<copy todir="${web.buildroot}" overwrite="true">
+			<fileset dir="${src.webroot}" />
+		</copy>
+
+		<copy todir="${tmp.src.total}" overwrite="true">
+			<fileset dir="${src.pasta2}" />
+			<fileset dir="${src.common}" />
+			<fileset dir="${src.main}" />
+			<fileset dir="${src.actions}" />
+		</copy>
+		<copy todir="${web.compile}" overwrite="true">
+			<fileset dir="${tmp.src.total}">
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile" depends="copy">
+		<javac includeantruntime="false" srcdir="${tmp.src.total}" destdir="${web.compile}" debug="on" encoding="UTF-8">
+			<classpath>
+				<fileset dir="${web.lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${src.buildlib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="build_all" depends="compile">
+		<delete dir="${tmp.src.total}" />
+	</target>
+</project>
