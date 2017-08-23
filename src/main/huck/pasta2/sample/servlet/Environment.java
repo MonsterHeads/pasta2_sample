@@ -56,7 +56,7 @@ public class Environment implements ServletContextListener {
 			case LOCAL:
 			default:
 				logConfPath = "/WEB-INF/classes/local.log4j.properties";
-				mainDBURL = "jdbc:mariadb://127.0.0.1:3306/pasta2_sample?characterEncoding=UTF-8";
+				mainDBURL = "jdbc:mariadb://192.168.137.102:3306/pasta2_sample?characterEncoding=UTF-8";
 				break;
 			}
 			

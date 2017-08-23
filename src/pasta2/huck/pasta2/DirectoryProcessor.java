@@ -118,6 +118,7 @@ public class DirectoryProcessor {
 				}
 			}
 			if( null != processEx ) {
+				processEx.printStackTrace();
 				viewController.showException(path, processEx, req, res, extension, viewVars);
 			}
 		} catch( IOException ioE ) {

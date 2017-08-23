@@ -30,7 +30,7 @@ public class ApiViewController extends ViewController {
 	
 	@Override
 	public void showView(String path, HttpServletRequest req, HttpServletResponse res, String extension, ViewVarMap viewVars) throws Exception {
-		String result = APIViewUtils.renderView(path, extension, viewVars, extension);
+		String result = APIViewUtils.renderView(path, extension, viewVars, encoding);
 		byte[] resultBytes = result.getBytes(encoding);
 		String contentType;
 		if( "json".equalsIgnoreCase(extension) ) {

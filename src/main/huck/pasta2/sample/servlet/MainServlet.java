@@ -50,7 +50,7 @@ import huck.pasta2.view.DoNothingViewController;
 			exceptionHandlers = { AllExceptionHandler.class },
 			filters = {},
 			viewMappings = {
-				@ViewMappingParam(name="API", extensions = { "json" }),
+				@ViewMappingParam(name="API", extensions = { "json", "xml" }),
 				@ViewMappingParam(name="DoNothing", extensions = { "action" }),
 				@ViewMappingParam(name="Velocity", extensions = { "", "htm", "html" }),
 				@ViewMappingParam(name="Static", extensions = { }),
