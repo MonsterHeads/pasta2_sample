@@ -24,7 +24,11 @@ public class AllExceptionHandler extends ExceptionHandler<Exception> {
 	public static Exception log(HttpServletRequest req, Exception ex) {
 		String lineSeperator = System.getProperty("line.separator");
 		StringBuffer buf = new StringBuffer();
-		buf.append("[AllExceptionHandler]").append(req.getRequestURI()).append("?").append(req.getQueryString()).append(lineSeperator);
+		buf.append("[AllExceptionHandler]").append(req.getRequestURI());
+		if (null != req.getQueryString() ) {
+			buf.append("?").append(req.getQueryString());
+		}
+		buf.append(lineSeperator);
 		String referer = req.getHeader("Referer");
 		buf.append("REFERER=").append(null==referer?"":referer).append(lineSeperator);
 
@@ -39,7 +43,7 @@ public class AllExceptionHandler extends ExceptionHandler<Exception> {
 			buf.append("IP=").append(proxyedIP).append(lineSeperator);
 		}
 
-		buf.append("PARAMETERS").append(lineSeperator);
+		buf.append("PARAMETERS ").append(req.getParameterMap().size()).append(lineSeperator);
 		Enumeration<?> keyEnum = req.getParameterNames();
 		while( keyEnum.hasMoreElements())
 		{
